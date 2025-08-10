@@ -7,6 +7,7 @@ import {
   DeepPartial,
 } from 'typeorm';
 
+@Injectable()
 export class BaseRepository<T extends ObjectLiteral> {
   constructor(private readonly repository: Repository<T>) {}
 
@@ -34,5 +35,17 @@ export class BaseRepository<T extends ObjectLiteral> {
       relations,
     };
     return this.repository.findOne(options);
+  }
+  async get(
+    filter?: FindOptionsWhere<T>,
+    orderBy?: { [P in keyof T]?: 'ASC' | 'DESC' | undefined },
+    relations: string[] = [],
+  ): Promise<T[]> {
+    const options: FindOneOptions<T> = {
+      where: filter,
+      //order: orderBy,
+      relations,
+    };
+    return this.repository.find(options);
   }
 }
