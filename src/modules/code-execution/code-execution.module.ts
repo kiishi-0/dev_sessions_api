@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { CodeExecutionApiClient } from './CodeExecutionApiClient';
 import { CodeExecutionService } from './code-execution.service';
+import { SharedModule } from 'src/shared/shared.module';
 
 @Module({
-  exports: [CodeExecutionApiClient, CodeExecutionService],
-  imports: [CodeExecutionApiClient, CodeExecutionService],
+  exports: [CodeExecutionApiClient],
+  providers: [CodeExecutionService],
+  imports: [CodeExecutionApiClient, SharedModule],
 })
 export class CodeExecutionModule {}
