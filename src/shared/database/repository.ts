@@ -7,6 +7,21 @@ import {
   DeepPartial,
 } from 'typeorm';
 
+///
+///BaseRepository class usage guide
+///
+// @Injectable()
+// export class UserService {
+//   constructor(
+//     @Inject('UserRepository') private readonly userRepo: BaseRepository<User>,
+//   ) {}
+
+//   async getAllUsers() {
+//     return this.userRepo.findAll();
+//   }
+// }
+////
+
 @Injectable()
 export class BaseRepository<T extends ObjectLiteral> {
   constructor(private readonly repository: Repository<T>) {}

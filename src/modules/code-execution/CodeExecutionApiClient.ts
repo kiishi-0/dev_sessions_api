@@ -23,7 +23,7 @@ export class CodeExecutionApiClient {
   ): Promise<CodeExecutionApiResult> {
     //specify variables
 
-    var response = this.httpClient.post<CodeSubmissionResponse>(
+    var response = this.httpClient.post<CodeExecutionApiResult>(
       `${this.apiUrl}submissions`,
       request,
       {
@@ -33,6 +33,6 @@ export class CodeExecutionApiClient {
     );
     //make request to API
     //return response
-    return response;
+    return { ...response };
   }
 }
