@@ -35,7 +35,6 @@ import { ExecutionResults } from 'src/modules/code-execution/entities/ExecutionR
           Sessions,
           CodeSnapshots,
           CodeSubmissions,
-          SessionParticipants,
           EditorEventLogs,
           ExecutionResults,
           Languages,

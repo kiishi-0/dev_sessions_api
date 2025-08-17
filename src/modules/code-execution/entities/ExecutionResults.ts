@@ -7,8 +7,9 @@ import {
   OneToMany,
 } from 'typeorm';
 import { CodeSubmissions } from './CodeSubmissions';
-import { Sessions } from '../../../entities/entities/Sessions';
+// import { Sessions } from '../../../entities/entities/Sessions';
 import { Users } from '../../user/entities/Users';
+import { Sessions } from 'src/modules/session/entities/Sessions';
 
 @Index('execution_results_pkey', ['id'], { unique: true })
 @Entity('execution_results', { schema: 'public' })
