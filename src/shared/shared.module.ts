@@ -15,6 +15,7 @@ import { EditorEventLogs } from 'src/modules/editor/entities/EditorEventLogs';
 import { ExecutionResults } from 'src/modules/code-execution/entities/ExecutionResults';
 import { Languages } from 'src/modules/editor/entities/Languages';
 import { Repository } from 'typeorm';
+import { LoggingService } from './logger/log.util';
 
 // const repositories__: Provider[] = [
 //   {
@@ -88,7 +89,7 @@ export const repositories: Provider[] = entities.map((entity) => ({
 
 @Module({
   imports: [DatabaseModule, TypeOrmModule.forFeature([...entities])],
-  providers: [...repositories, HttpClientService, RsaUtil],
-  exports: [...repositories, HttpClientService, RsaUtil],
+  providers: [...repositories, HttpClientService, RsaUtil, LoggingService],
+  exports: [...repositories, HttpClientService, RsaUtil, LoggingService],
 })
 export class SharedModule {}
