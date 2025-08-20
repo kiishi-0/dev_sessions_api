@@ -5,3 +5,8 @@ export interface ApiResponse<T> {
   Message: string;
   Data: T;
 }
+
+export interface ErrorModel {
+  ResponseCode: HttpStatus;
+  Message: string;
+}
