@@ -6,7 +6,7 @@ export interface CodeSubmissionRequest {
 
 export interface CodeSubmissionResponse {}
 
-export interface CodeExecutionApiResult {
+export interface CodeExecutionApiSubmitResult {
   source_code: string;
   language_id: number;
   stdin: string;

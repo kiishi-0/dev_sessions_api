@@ -1,0 +1,25 @@
+import { Controller, Get, HttpStatus } from '@nestjs/common';
+import { CodeExecutionService } from './code-execution.service';
+import {
+  CodeSubmissionRequest,
+  CodeSubmissionResponse,
+} from './dto/code-submission';
+import { ApiResponse } from 'src/shared/dtos/api.result';
+import { response } from 'express';
+
+@Controller()
+export class CodeExecutionController {
+  constructor(private readonly codeService: CodeExecutionService) {}
+
+  @Get('code-execution/submit-code')
+  async SubmitCode(
+    request: CodeSubmissionRequest,
+  ): Promise<ApiResponse<string>> {
+    const response = await this.codeService.SubmitCode(request);
+    return {
+      ResponseCode: HttpStatus.OK,
+      Data: response,
+      Message: 'Code submitted successfully',
+    };
+  }
+}
