@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpClientService } from 'src/shared/utils/httpClient';
 import {
-  CodeExecutionApiResult,
+  CodeExecutionApiSubmitResult,
   CodeSubmissionResponse,
 } from './dto/code-submission';
 
@@ -11,7 +11,7 @@ export class CodeExecutionApiClient {
   private apiUrl: string;
   constructor(
     private httpClient: HttpClientService,
-    private configService: ConfigService,
+    configService: ConfigService,
   ) {
     this.apiUrl = configService.get<string>('CODE_EXECUTION_URL') || '';
   }
@@ -20,25 +20,19 @@ export class CodeExecutionApiClient {
     request: any,
     wait: true,
     base64_encoded: false,
-  ): Promise<CodeExecutionApiResult> {
+  ): Promise<CodeExecutionApiSubmitResult> {
     //specify variables
 
-    var response = await this.httpClient.post<CodeExecutionApiResult>(
+    var response = await this.httpClient.post<CodeExecutionApiSubmitResult>(
       `${this.apiUrl}submissions`,
       request,
       {
         wait: wait,
         base64_encoded: base64_encoded,
       },
-      {
-        'x-rapidapi-key': this.configService.get<string>('JUDGE_API_KEY') || '',
-        'x-rapidapi-host':
-          this.configService.get<string>('JUDGE_API_HOST') || '',
-        'Content-Type': 'application/json',
-      },
     );
     //make request to API
     //return response
-    return response;
+    return { ...response };
   }
 }
