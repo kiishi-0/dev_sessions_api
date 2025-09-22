@@ -16,6 +16,9 @@ export class Languages {
   @Column('character varying', { name: 'code', unique: true, length: 50 })
   code: string;
 
+  @Column('integer', { name: 'language_id' })
+  language_id: Number;
+
   @OneToMany(() => CodeSnapshots, (codeSnapshots) => codeSnapshots.languageCode)
   codeSnapshots: CodeSnapshots[];
 

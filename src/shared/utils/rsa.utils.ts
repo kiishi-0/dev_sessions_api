@@ -17,8 +17,8 @@ export class RsaUtil {
       throw new Error('RSA key files not found. Check your .env paths.');
     }
 
-    this.publicKey = fs.readFileSync(publicKeyPath, 'utf8');
-    this.privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+    // this.publicKey = fs.readFileSync(publicKeyPath, 'utf8');
+    // this.privateKey = fs.readFileSync(privateKeyPath, 'utf8');
   }
 
   /**
