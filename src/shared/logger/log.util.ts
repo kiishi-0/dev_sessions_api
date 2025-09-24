@@ -10,8 +10,8 @@ export class LoggingService {
   constructor() {
     (async () => {
       // Dynamically import SeqTransport
-      const seqModule = await import('@datalust/winston-seq');
-      SeqTransport = seqModule.SeqTransport;
+      // const seqModule = await import('@datalust/winston-seq');
+      // SeqTransport = seqModule.SeqTransport;
 
       this.logger = winston.createLogger({
         level: 'info',
@@ -41,13 +41,13 @@ export class LoggingService {
           }),
 
           // log to Seq
-          new SeqTransport({
-            serverUrl: 'http://localhost:5341', // your seq instance
-            apiKey: 'your-seq-api-key-if-any',
-            onError: (e: any) => {
-              console.error('Seq transport error', e);
-            },
-          }),
+          // new SeqTransport({
+          //   serverUrl: 'http://localhost:5341', // your seq instance
+          //   apiKey: 'your-seq-api-key-if-any',
+          //   onError: (e: any) => {
+          //     console.error('Seq transport error', e);
+          //   },
+          // }),
         ],
       });
     })();
