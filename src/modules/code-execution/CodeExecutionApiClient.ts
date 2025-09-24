@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpClientService } from 'src/shared/utils/httpClient';
 import {
-  CodeExecutionApiResult,
+  CodeExecutionApiSubmitResult,
   CodeSubmissionResponse,
 } from './dto/code-submission';
 
@@ -20,10 +20,10 @@ export class CodeExecutionApiClient {
     request: any,
     wait: true,
     base64_encoded: false,
-  ): Promise<CodeExecutionApiResult> {
+  ): Promise<CodeExecutionApiSubmitResult> {
     //specify variables
 
-    var response = await this.httpClient.post<CodeExecutionApiResult>(
+    var response = await this.httpClient.post<CodeExecutionApiSubmitResult>(
       `${this.apiUrl}submissions`,
       request,
       {
@@ -39,6 +39,6 @@ export class CodeExecutionApiClient {
     );
     //make request to API
     //return response
-    return response;
+    return { ...response };
   }
 }
