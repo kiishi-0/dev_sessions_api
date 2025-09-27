@@ -14,6 +14,9 @@ export class LoggingService {
       // const seqModule = await import('@datalust/winston-seq');
       // SeqTransport = seqModule.SeqTransport;
 
+      var appLogLocation = `${configService.get('LOG_LOCATION')}/app_${new Date(Date.now()).toCustomFormat('_')}.log`;
+      var errorLogLocation = `${configService.get('LOG_LOCATION')}/app_error_${new Date(Date.now()).toCustomFormat('_')}.log`;
+
       this.logger = winston.createLogger({
         level: 'info',
         format: winston.format.combine(
@@ -23,17 +26,13 @@ export class LoggingService {
         transports: [
           // log to file
           new winston.transports.File({
-            filename:
-              `${configService.get('LOG_LOCATION')}/app_${new Date(Date.now()).toCustomFormat('_')}.log` ||
-              'logs/app.log',
+            filename: appLogLocation || 'logs/app.log',
             level: 'info',
           }),
 
           // log errors separately
           new winston.transports.File({
-            filename:
-              `${configService.get('LOG_LOCATION')}/app_error_${new Date(Date.now()).toCustomFormat('_')}.log` ||
-              'logs/error.log',
+            filename: errorLogLocation || 'logs/error.log',
             level: 'error',
           }),
 
