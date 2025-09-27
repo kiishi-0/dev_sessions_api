@@ -16,6 +16,7 @@ import { ExecutionResults } from 'src/modules/code-execution/entities/ExecutionR
 import { Languages } from 'src/modules/editor/entities/Languages';
 import { Repository } from 'typeorm';
 import { LoggingService } from './logger/log.util';
+import { applicationUtilService } from './utils/applicationUtilService';
 
 // const repositories__: Provider[] = [
 //   {
@@ -89,7 +90,19 @@ export const repositories: Provider[] = entities.map((entity) => ({
 
 @Module({
   imports: [DatabaseModule, TypeOrmModule.forFeature([...entities])],
-  providers: [...repositories, HttpClientService, RsaUtil, LoggingService],
-  exports: [...repositories, HttpClientService, RsaUtil, LoggingService],
+  providers: [
+    ...repositories,
+    HttpClientService,
+    RsaUtil,
+    LoggingService,
+    applicationUtilService,
+  ],
+  exports: [
+    ...repositories,
+    HttpClientService,
+    RsaUtil,
+    LoggingService,
+    applicationUtilService,
+  ],
 })
 export class SharedModule {}

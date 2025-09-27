@@ -1,5 +1,6 @@
 // logging.service.ts
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as winston from 'winston';
 // Remove static import of SeqTransport
 let SeqTransport: any;
@@ -7,7 +8,7 @@ let SeqTransport: any;
 @Injectable()
 export class LoggingService {
   private logger: winston.Logger;
-  constructor() {
+  constructor(configService: ConfigService) {
     (async () => {
       // Dynamically import SeqTransport
       // const seqModule = await import('@datalust/winston-seq');
@@ -22,13 +23,17 @@ export class LoggingService {
         transports: [
           // log to file
           new winston.transports.File({
-            filename: 'logs/app.log',
+            filename:
+              `${configService.get('LOG_LOCATION')}/app_${new Date(Date.now()).toCustomFormat('_')}.log` ||
+              'logs/app.log',
             level: 'info',
           }),
 
           // log errors separately
           new winston.transports.File({
-            filename: 'logs/error.log',
+            filename:
+              `${configService.get('LOG_LOCATION')}/app_error_${new Date(Date.now()).toCustomFormat('_')}.log` ||
+              'logs/error.log',
             level: 'error',
           }),
 

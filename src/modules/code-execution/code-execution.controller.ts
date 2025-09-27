@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post } from '@nestjs/common';
 import { CodeExecutionService } from './code-execution.service';
 import {
   CodeSubmissionRequest,
@@ -11,9 +11,9 @@ import { response } from 'express';
 export class CodeExecutionController {
   constructor(private readonly codeService: CodeExecutionService) {}
 
-  @Get('code-execution/submit-code')
+  @Post('code-execution/submit-code')
   async SubmitCode(
-    request: CodeSubmissionRequest,
+    @Body() request: CodeSubmissionRequest,
   ): Promise<ApiResponse<string>> {
     const response = await this.codeService.SubmitCode(request);
     return {
