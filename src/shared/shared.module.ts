@@ -17,6 +17,8 @@ import { Languages } from 'src/modules/editor/entities/Languages';
 import { Repository } from 'typeorm';
 import { LoggingService } from './logger/log.util';
 import { applicationUtilService } from './utils/applicationUtilService';
+import { APP_FILTER } from '@nestjs/core';
+import { ErrorLoggingMiddleware } from './middlewares/error.logging';
 
 // const repositories__: Provider[] = [
 //   {

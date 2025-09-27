@@ -13,6 +13,7 @@ import { LoggingService } from '../logger/log.util';
 import { ErrorModel } from '../dtos/api.result';
 import { DevSessionException } from '../exceptions/devsessions.exception';
 
+@Injectable()
 @Catch()
 export class ErrorLoggingMiddleware implements ExceptionFilter {
   constructor(private readonly logger: LoggingService) {}
