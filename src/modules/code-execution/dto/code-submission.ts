@@ -1,6 +1,6 @@
 export interface CodeSubmissionRequest {
   source_code: string;
-  language_id: Number;
+  language_id: string;
   stdin: string;
 }
 

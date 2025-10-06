@@ -36,13 +36,14 @@ export class HttpClientService {
     params?: Record<string, any>,
     headers?: Record<string, string>,
   ): Promise<T> {
-    return this.request<T>({
+    var response = await this.request<T>({
       method: 'POST',
       url,
       data,
       params,
       headers,
     });
+    return response;
   }
 
   async put<T>(

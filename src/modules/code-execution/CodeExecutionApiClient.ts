@@ -18,8 +18,8 @@ export class CodeExecutionApiClient {
 
   async SubmitCode(
     request: any,
-    wait: true,
-    base64_encoded: false,
+    wait: boolean = true,
+    base64_encoded: boolean = true,
   ): Promise<CodeExecutionApiSubmitResult> {
     //specify variables
 

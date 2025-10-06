@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  RelationId,
 } from 'typeorm';
 import { ExecutionResults } from './ExecutionResults';
 import { Sessions } from 'src/modules/session/entities/Sessions';
@@ -50,4 +51,20 @@ export class CodeSubmissions {
     (executionResults) => executionResults.codeSubmission,
   )
   executionResults: ExecutionResults[];
+
+  //@RelationId((codeSubmission: CodeSubmissions) => codeSubmission.session)
+  @Column('uuid', { name: 'session_id', nullable: true })
+  sessionId: string;
+
+  // @RelationId((codeSubmission: CodeSubmissions) => codeSubmission.user)
+  @Column('uuid', { name: 'user_id', nullable: true })
+  userId: string;
+
+  //@RelationId((codeSubmission: CodeSubmissions) => codeSubmission.languageCode)
+  @Column('varchar', { name: 'language_code', nullable: true })
+  languageCodeId: string;
+
+  //@RelationId((codeSubmission: CodeSubmissions) => codeSubmission.result)
+  @Column('uuid', { name: 'result_id', nullable: true })
+  resultId: string;
 }

@@ -32,7 +32,7 @@ export class CodeExecutionService {
     request.stdin = this.rsaUtil.toBase64(stdin);
 
     const language = await this.languagesRepo.getFirstOrDefault({
-      language_id: language_id,
+      code: language_id,
     });
     if (language == null || language == undefined) {
       throw new DevSessionException(
@@ -43,16 +43,22 @@ export class CodeExecutionService {
 
     //submit execution request
     const submissionRecord = await this.submissionRepo.create({
-      createdAt: Date.now(),
+      createdAt: new Date(),
       languageCode: language,
-      sourceCode: request.source_code,
+      sourceCode: source_code,
+      userId: '528590ee-ff74-4631-bac3-0a57552d94eb', //remove test_value
+      sessionId: '6a510ce5-9105-4ad2-b52f-98fbd90ebdf1', //remove test_value
     });
 
     // request.source_code = encCode;//
     const submissionRes = await this.executionClient.SubmitCode(
-      request,
+      {
+        source_code: request.source_code,
+        language_id: Number(language.language_id),
+        stdin: request.stdin,
+      },
       true,
-      false,
+      true,
     );
 
     //submit code execution result
