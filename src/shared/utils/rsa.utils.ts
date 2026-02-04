@@ -59,10 +59,16 @@ export class RsaUtil {
   // }
 
   toBase64(data: string): string {
+    if (data == null) {
+      return '';
+    }
     return Buffer.from(data, 'utf-8').toString('base64');
   }
 
   fromBase64(encoded: string): string {
+    if (encoded == null) {
+      return '';
+    }
     return Buffer.from(encoded, 'base64').toString('utf-8');
   }
 }

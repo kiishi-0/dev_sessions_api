@@ -45,7 +45,7 @@ export class CodeExecutionService {
     const submissionRecord = await this.submissionRepo.create({
       createdAt: new Date(),
       languageCode: language,
-      sourceCode: source_code,
+      sourceCode: request.source_code,
       userId: '528590ee-ff74-4631-bac3-0a57552d94eb', //remove test_value
       sessionId: '6a510ce5-9105-4ad2-b52f-98fbd90ebdf1', //remove test_value
     });
@@ -62,10 +62,10 @@ export class CodeExecutionService {
     );
 
     //submit code execution result
-
+    //log token
     //submit code execution result
     const executionResultRecord = await this.execResultRepo.create({
-      createdAt: Date.now(),
+      createdAt: new Date(),
       codeSubmission: submissionRecord,
       exitCode: submissionRes.exit_code,
       stderr:
@@ -74,6 +74,16 @@ export class CodeExecutionService {
           : this.rsaUtil.fromBase64(submissionRes.stderr),
       stdout: this.rsaUtil.fromBase64(submissionRes.stdout),
       timeTakenMs: Number(submissionRes.time),
+
+      compileOutput: submissionRes.compile_output
+        ? this.rsaUtil.fromBase64(submissionRes.compile_output)
+        : '',
+
+      memory: submissionRes.memory,
+      responseMessage: submissionRes.message || '',
+      statusMessage: submissionRes.status.description || '',
+      userId: '528590ee-ff74-4631-bac3-0a57552d94eb', //remove test_value
+      sessionId: '6a510ce5-9105-4ad2-b52f-98fbd90ebdf1', //remove test_value
     });
     //return result
     return submissionRes.post_execution_filesystem;

@@ -32,6 +32,18 @@ export class ExecutionResults {
   @Column('timestamp with time zone', { name: 'created_at' })
   createdAt: Date;
 
+  @Column('integer', { name: 'memory', default: 0 })
+  memory: number;
+
+  @Column('text', { name: 'compile_output', default: '' })
+  compileOutput: string;
+
+  @Column('text', { name: 'response_message', default: '' })
+  responseMessage: string;
+
+  @Column('text', { name: 'status_message', default: '' })
+  statusMessage: string;
+
   @OneToMany(() => CodeSubmissions, (codeSubmissions) => codeSubmissions.result)
   codeSubmissions: CodeSubmissions[];
 
@@ -49,4 +61,13 @@ export class ExecutionResults {
   @ManyToOne(() => Users, (users) => users.executionResults)
   @JoinColumn([{ name: 'user_id', referencedColumnName: 'id' }])
   user: Users;
+
+  @Column('uuid', { name: 'session_id', nullable: false })
+  sessionId: string;
+
+  @Column('uuid', { name: 'user_id', nullable: false })
+  userId: string;
+
+  @Column('uuid', { nullable: false, name: 'code_submission_id' })
+  codeSubmissionId: string;
 }
