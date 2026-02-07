@@ -44,7 +44,7 @@ export class CodeExecutionService {
     //submit execution request
     const submissionRecord = await this.submissionRepo.create({
       createdAt: new Date(),
-      languageCode: language,
+      languageCodeId: language.code,
       sourceCode: request.source_code,
       userId: '528590ee-ff74-4631-bac3-0a57552d94eb', //remove test_value
       sessionId: '6a510ce5-9105-4ad2-b52f-98fbd90ebdf1', //remove test_value
@@ -66,8 +66,8 @@ export class CodeExecutionService {
     //submit code execution result
     const executionResultRecord = await this.execResultRepo.create({
       createdAt: new Date(),
-      codeSubmission: submissionRecord,
-      exitCode: submissionRes.exit_code,
+      codeSubmissionId: submissionRecord.id,
+      exitCode: submissionRes.exit_code || 0, ///what is this???
       stderr:
         submissionRes.stderr == null
           ? null
@@ -78,7 +78,6 @@ export class CodeExecutionService {
       compileOutput: submissionRes.compile_output
         ? this.rsaUtil.fromBase64(submissionRes.compile_output)
         : '',
-
       memory: submissionRes.memory,
       responseMessage: submissionRes.message || '',
       statusMessage: submissionRes.status.description || '',

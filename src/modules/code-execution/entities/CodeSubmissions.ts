@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
   RelationId,
 } from 'typeorm';
 import { ExecutionResults } from './ExecutionResults';
@@ -18,7 +19,7 @@ import { Languages } from 'src/modules/editor/entities/Languages';
 @Index('code_submissions_pkey', ['id'], { unique: true })
 @Entity('code_submissions', { schema: 'public' })
 export class CodeSubmissions {
-  @Column('uuid', { primary: true, name: 'id' })
+  @PrimaryGeneratedColumn('uuid') // ✅ Change this line
   id: string;
 
   @Column('text', { name: 'source_code', nullable: true })

@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CodeSubmissions } from './CodeSubmissions';
 // import { Sessions } from '../../../entities/entities/Sessions';
@@ -14,7 +15,7 @@ import { Sessions } from 'src/modules/session/entities/Sessions';
 @Index('execution_results_pkey', ['id'], { unique: true })
 @Entity('execution_results', { schema: 'public' })
 export class ExecutionResults {
-  @Column('uuid', { primary: true, name: 'id' })
+  @PrimaryGeneratedColumn('uuid') // ✅ Change this line
   id: string;
 
   @Column('text', { name: 'stdout', nullable: true })

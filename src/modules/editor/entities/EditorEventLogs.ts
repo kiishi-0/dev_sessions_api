@@ -1,11 +1,18 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Sessions } from '../../session/entities/Sessions';
 import { Users } from '../../user/entities/Users';
 
 @Index('editor_event_logs_pkey', ['id'], { unique: true })
 @Entity('editor_event_logs', { schema: 'public' })
 export class EditorEventLogs {
-  @Column('uuid', { primary: true, name: 'id' })
+  @PrimaryGeneratedColumn('uuid') // ✅ Change this line
   id: string;
 
   @Column('character varying', {

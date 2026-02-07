@@ -1,4 +1,11 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Sessions } from '../entities/Sessions';
 import { Users } from '../../user/entities/Users';
 import { SessionParticipantRoles } from './SessionParticipantRoles';
@@ -6,7 +13,7 @@ import { SessionParticipantRoles } from './SessionParticipantRoles';
 @Index('session_participants_pkey', ['id'], { unique: true })
 @Entity('session_participants', { schema: 'public' })
 export class SessionParticipants {
-  @Column('uuid', { primary: true, name: 'id' })
+  @PrimaryGeneratedColumn('uuid') // ✅ Change this line
   id: string;
 
   @Column('timestamp with time zone', { name: 'joined_at', nullable: true })

@@ -1,4 +1,11 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Sessions } from '../../session/entities/Sessions';
 import { Users } from '../../user/entities/Users';
 import { Languages } from '../../editor/entities/Languages';
@@ -6,7 +13,7 @@ import { Languages } from '../../editor/entities/Languages';
 @Index('code_snapshots_pkey', ['id'], { unique: true })
 @Entity('code_snapshots', { schema: 'public' })
 export class CodeSnapshots {
-  @Column('uuid', { primary: true, name: 'id' })
+  @PrimaryGeneratedColumn('uuid') // ✅ Change this line
   id: string;
 
   @Column('text', { name: 'code', nullable: true })

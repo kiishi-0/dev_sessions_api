@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CodeSnapshots } from '../../code-execution/entities/CodeSnapshots';
 import { CodeSubmissions } from '../../code-execution/entities//CodeSubmissions';
@@ -17,7 +18,7 @@ import { Languages } from '../../editor/entities/Languages';
 @Index('sessions_pkey', ['id'], { unique: true })
 @Entity('sessions', { schema: 'public' })
 export class Sessions {
-  @Column('uuid', { primary: true, name: 'id' })
+  @PrimaryGeneratedColumn('uuid') // ✅ Change this line
   id: string;
 
   @Column('character varying', { name: 'title', nullable: true, length: 255 })

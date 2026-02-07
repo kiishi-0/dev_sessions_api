@@ -1,22 +1,28 @@
-import { Column, Entity, Index, OneToMany } from "typeorm";
-import { SessionParticipants } from "./SessionParticipants";
+import {
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { SessionParticipants } from './SessionParticipants';
 
-@Index("session_participant_roles_code_key", ["code"], { unique: true })
-@Index("session_participant_roles_pkey", ["id"], { unique: true })
-@Entity("session_participant_roles", { schema: "public" })
+@Index('session_participant_roles_code_key', ['code'], { unique: true })
+@Index('session_participant_roles_pkey', ['id'], { unique: true })
+@Entity('session_participant_roles', { schema: 'public' })
 export class SessionParticipantRoles {
-  @Column("uuid", { primary: true, name: "id" })
+  @PrimaryGeneratedColumn('uuid') // ✅ Change this line
   id: string;
 
-  @Column("character varying", { name: "code", unique: true, length: 50 })
+  @Column('character varying', { name: 'code', unique: true, length: 50 })
   code: string;
 
-  @Column("character varying", { name: "name", length: 100 })
+  @Column('character varying', { name: 'name', length: 100 })
   name: string;
 
   @OneToMany(
     () => SessionParticipants,
-    (sessionParticipants) => sessionParticipants.roleCode
+    (sessionParticipants) => sessionParticipants.roleCode,
   )
   sessionParticipants: SessionParticipants[];
 }
