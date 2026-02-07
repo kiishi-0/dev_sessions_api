@@ -39,6 +39,9 @@ export class ExecutionResults {
   @Column('text', { name: 'compile_output', default: '' })
   compileOutput: string;
 
+  @Column('text', { name: 'execution_token', default: '' })
+  executionToken: string;
+
   @Column('text', { name: 'response_message', default: '' })
   responseMessage: string;
 

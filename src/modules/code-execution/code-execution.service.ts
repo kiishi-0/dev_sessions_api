@@ -70,7 +70,7 @@ export class CodeExecutionService {
       exitCode: submissionRes.exit_code || 0, ///what is this???
       stderr:
         submissionRes.stderr == null
-          ? null
+          ? ''
           : this.rsaUtil.fromBase64(submissionRes.stderr),
       stdout: this.rsaUtil.fromBase64(submissionRes.stdout),
       timeTakenMs: Number(submissionRes.time),
@@ -79,7 +79,10 @@ export class CodeExecutionService {
         ? this.rsaUtil.fromBase64(submissionRes.compile_output)
         : '',
       memory: submissionRes.memory,
-      responseMessage: submissionRes.message || '',
+      responseMessage: submissionRes.message
+        ? this.rsaUtil.fromBase64(submissionRes.message)
+        : '',
+      executionToken: submissionRes.token || '',
       statusMessage: submissionRes.status.description || '',
       userId: '528590ee-ff74-4631-bac3-0a57552d94eb', //remove test_value
       sessionId: '6a510ce5-9105-4ad2-b52f-98fbd90ebdf1', //remove test_value
