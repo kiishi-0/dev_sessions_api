@@ -24,7 +24,9 @@ export class CodeExecutionService {
     private readonly languagesRepo: BaseRepository<Languages>,
   ) {}
 
-  async SubmitCode(request: CodeSubmissionRequest): Promise<string> {
+  async SubmitCode(
+    request: CodeSubmissionRequest,
+  ): Promise<CodeSubmissionResponse> {
     //decode the source code
     const { source_code, language_id, stdin } = request;
 
@@ -88,6 +90,14 @@ export class CodeExecutionService {
       sessionId: '6a510ce5-9105-4ad2-b52f-98fbd90ebdf1', //remove test_value
     });
     //return result
-    return submissionRes.post_execution_filesystem;
+    return {
+      compile_output: executionResultRecord.compileOutput,
+      execution_message: executionResultRecord.responseMessage,
+      memory: executionResultRecord.memory,
+      time: executionResultRecord.timeTakenMs,
+      status_message: executionResultRecord.statusMessage,
+      stderr: executionResultRecord.stderr || '',
+      stdout: executionResultRecord.stdout || '',
+    };
   }
 }

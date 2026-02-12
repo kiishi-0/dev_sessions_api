@@ -14,7 +14,7 @@ export class CodeExecutionController {
   @Post('code-execution/submit-code')
   async SubmitCode(
     @Body() request: CodeSubmissionRequest,
-  ): Promise<ApiResponse<string>> {
+  ): Promise<ApiResponse<CodeSubmissionResponse>> {
     const response = await this.codeService.SubmitCode(request);
     return {
       ResponseCode: HttpStatus.OK,

@@ -4,7 +4,15 @@ export interface CodeSubmissionRequest {
   stdin: string;
 }
 
-export interface CodeSubmissionResponse {}
+export interface CodeSubmissionResponse {
+  time: number;
+  memory: number;
+  stdout: string;
+  stderr: string;
+  execution_message: string;
+  compile_output: string;
+  status_message: string;
+}
 
 export interface CodeExecutionApiSubmitResult {
   source_code: string;
